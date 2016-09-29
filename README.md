@@ -4,7 +4,15 @@ Local web-copy library of Lib.rus.ec.
 # Basic usage #
 
 
-# Installation #
+# Requirements #
+
+MySql 5
+Python 2.7
+7z
+pip install flask
+pip install SQLAlchemy
+pip install Flask-SQLAlchemy
+pip install mysqldb
 
 # License #
 
