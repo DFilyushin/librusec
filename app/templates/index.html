@@ -1,0 +1,34 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/yeti.bootstrap.min.css') }}" >
+      <link rel="icon" href="{{ url_for('static', filename = 'images/favicon.png') }}" type="image/png">
+      <title>Библиотека</title>
+
+  </head>
+  <body>
+        <img src="{{ url_for('static', filename = 'images/books-with-coffee.jpg') }} " class="center-block">
+        <h4 class="text-center">Библиотека Либрусека</h4>
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-8">
+            <p class="text-center"> Авторы:
+            {% for letter in letters %}
+                | <a href="/authors?letter={{loop.index}}">{{ letter}} </a>
+            {% endfor %}
+            |
+            </p>
+            <form action="/search" method="post" role="form">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search_text" placeholder="Поиск по названию книги, фамилии автора" required>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary" type="button">Поиск</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-2">
+        </div>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/yeti.bootstrap.min.css') }}" >
+      <link rel="icon" href="{{ url_for('static', filename = 'images/favicon.png') }}" type="image/png">
+      <title>Библиотека</title>
+
+  </head>
+  <body>
+        <a href="/"><img src="{{ url_for('static', filename = 'images/books-with-coffee.jpg') }} " class="center-block"></a>
+        {% if find_text %}
+            <h4 class="text-center">Результаты поиска "{{ find_text }}"</h4>
+        {% else %}
+            <h4 class="text-center">Список книг автора "<strong>{{ author }}</strong>"</h4>
+        {% endif %}
+    {% if books %}
+        <h4>Найденное в названии</h4>
+        <table class="table table-condensed">
+            <tr>
+                <th width="25%">Авторы</th>
+                <th width="50%">Название</th>
+                <th width="5%">Размер</th>
+                <th width="5%">Тип</th>
+                <th width="5%">Язык</th>
+                <th width="5%">Жанры</th>
+                <th width="5%"></th>
+            </tr>
+	{% for book in books %}
+	        <tr>
+                <td width="25%">
+                    {% for author in book.authors %}
+                    <a href="/authorbook?id={{ author.id }}">{{ author.last_name }}</a> <br>
+                    {% endfor %}
+                </td>
+                <td width="50%">{{ book.name }}</td>
+                <td width="5%">{{ book.fs }} Кб</td>
+                <td width="5%">{{ book.file_type }}</td>
+                <td width="5%">{{ book.lang }}</td>
+                <td width="5%">{{ book.genre }}</td>
+                <td width="5%"><a href="/download/{{ book.id }}">Скачать</a></td>
+            </tr>
+	{% endfor %}
+        </table>
+    {% endif %}
+
+    {% if author_books %}
+        <h4>Найденное в имени автора</h4>
+        <table class="table table-condensed">
+            <tr>
+                <th width="25%">Авторы</th>
+                <th width="50%">Название</th>
+                <th width="5%">Размер</th>
+                <th width="5%">Тип</th>
+                <th width="5%">Язык</th>
+                <th width="5%">Жанры</th>
+                <th width="5%"></th>
+            </tr>
+	{% for book in author_books %}
+	        <tr>
+                <td width="25%">
+                    {% for author in book.authors %}
+                    <a href="/authorbook?id={{ author.id }}">{{ author.last_name }}</a> <br>
+                    {% endfor %}
+                </td>
+                <td width="50%">{{ book.name }}</td>
+                <td width="5%">{{ book.fs }} Кб</td>
+                <td width="5%">{{ book.file_type }}</td>
+                <td width="5%">{{ book.lang }}</td>
+                <td width="5%">{{ book.genre }}</td>
+                <td width="5%"><a href="/download/{{ book.id }}">Скачать</a></td>
+            </tr>
+	{% endfor %}
+        </table>
+    {% endif %}
+    <p class="text-center">
+        <small>Запрос выполнен за {{ elapsed }} с. Конвертация за {{ elapsed2 }} с.</small>
+    </p>
+  </body>
+</html>

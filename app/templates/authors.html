@@ -1,0 +1,33 @@
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename = 'css/yeti.bootstrap.min.css') }}" >
+      <link rel="icon" href="{{ url_for('static', filename = 'images/favicon.png') }}" type="image/png">
+      <title>Библиотека</title>
+
+  </head>
+  <body>
+        <a href="/"><img src="{{ url_for('static', filename = 'images/books-with-coffee.jpg') }} " class="center-block"></a>
+        <h4 class="text-center">Библиотека</h4>
+        <div class="col-lg-12">
+            <p class="text-center"> Авторы:
+                {% for letter in letters %}
+                    | <a href="/authors?letter={{loop.index}}">{{ letter}} </a>
+                {% endfor %}
+                |
+            </p>
+        </div>
+        {%  if authors %}
+        <div class="col-lg-12">
+            <ul>
+            {% for author in authors %}
+            <li> <a href="/authorbook?id={{author.id}}">{{ author.last_name }} {{ author.first_name }} {{ author.middle_name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+
+  </body>
+</html>
